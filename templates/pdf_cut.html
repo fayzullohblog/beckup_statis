@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+      /* Bu CSS qismi fillarlar uchun izohli stili belgilaydi */
+      .fillar {
+        width: 100px;
+        height: 100px;
+        background-color: #f5f5f5;
+        border: 1px solid #ccc;
+        margin: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        float: left;
+      }
+      .fillar img {
+        max-width: 100%;
+        height: auto;
+      }
+      .fillar h3 {
+        margin-top: 0;
+        font-size: 18px;
+      }
+      .fillar p {
+        background-color: #ccc;
+        margin: 10px 0;
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      
+      /* CSS for the "Junatish" button */
+      .junatish-button {
+        background-color: #4CAF50; /* Yashil orqa fon rangi */
+        border: none; 
+        color: white; /* Oq matn rangi */
+        padding: 20px 20px; 
+        text-align: center;
+        text-decoration: none;
+        display: inline-block; 
+        font-size: 16px; 
+        float: right;
+        position:fixed;
+        bottom: 30px;
+        right:30px;
+        margin-top: 20px; 
+        cursor: pointer; 
+      }
+      
+      .junatish-button:hover {
+        background-color: #45a049; 
+      }
+
+      /* Chiroyli ranglar */
+      .ochish-button {
+        background-color: #2196F3; /* Ko'k orqa fon rangi */
+        color: white; /* Oq matn rangi */
+      }
+
+      .ochirish-button {
+        background-color: #f44336; /* Qizil orqa fon rangi */
+        color: white; /* Oq matn rangi */
+      }
+    </style>
+
+  
+  <body>
+
+<form action="page_delete/" method="GET" > 
+      
+    {% for pdf in imagepart %}
+        <div class="fillar">
+          
+          <a href="http://64.226.66.47:8000{{ pdf.oneimage.url }}" class="ochish-button">Ochish</a> <br>
+          <a href="http://64.226.66.47:8000/page_delete/?pdf_id={{pdf_id}}&page_id={{ pdf.id }}" class="ochirish-button">O'chirish</a>
+            <br><b>{{ pdf.title }}</b>          
+        </div>
+     {% endfor %}
+
+     
+</form>
+
+ <form action="create_zip/" method="POST">
+  {% csrf_token %}
+  <input type="hidden" name="pdf_id" value="{{ pdf_id }}">
+  <button class="junatish-button" type="submit">Junatish</button>
+ </form>
+   
+
+    <!-- Boshqa fillarlar shu usul bilan qo'shilishi mumkin -->
+  </body>
+
+{% endblock content %}
