@@ -99,7 +99,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'statisdb',
+            'NAME': 'hsatuz12_statis',
             'USER': 'blog_admin',
             'PASSWORD': 'statisdbpassword',
             'HOST': 'localhost',
